@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; // Added useState
 import styles from './Register.module.css'; // Ensure your styles are imported
-import layerimg from '../../assets/login.jpg'
+import layerimg from '../../assets/image.gif'
 
 export default function Register() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(false);
@@ -14,19 +14,19 @@ export default function Register() {
         }`}
        >
         <div className={`${styles["form-container"]} ${styles["register-container"]}`}>
-          <form action="#">
-            <h1 className='font-bold'>Register here.</h1>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Register</button>
+          <form action="#" className={styles}>
+            <h1 className={`${styles.head1} font-bold text-xl`}>Register here.</h1>
+            <input className={styles.input} type="text" placeholder="Name" />
+            <input className={styles.input} type="email" placeholder="Email" />
+            <input className={styles.input} type="password" placeholder="Password" />
+            <button className={styles.btn}>Register</button>
           </form>
         </div>
         <div className={`${styles["form-container"]} ${styles["login-container"]}`}>
-          <form action="#">
-            <h1 className='font-bold'>Login here.</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+          <form action="#" className={styles}>
+            <h1 className={`${styles.head1} font-bold text-xl`}>Login here.</h1>
+            <input className={styles.input} type="email" placeholder="Email" />
+            <input className={styles.input} type="password" placeholder="Password" />
             {/* <div className={styles.content}>
               <div className={styles.checkbox}>
                 <input type="checkbox" name="checkbox" id="checkbox" />
@@ -36,7 +36,7 @@ export default function Register() {
                 <a href="#">Forgot password?</a>
               </div>
             </div> */}
-            <button>Login</button>
+            <button className={styles.btn}>Login</button>
           </form>
         </div>
         <div className={styles["overlay-container"]}>
@@ -45,13 +45,12 @@ export default function Register() {
   style={{ backgroundImage: `url(${layerimg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
 >
             <div className={`${styles["overlay-panel"]} ${styles["overlay-left"]}`}>
-              <h1 className='text-5xl m-0'>
+              <h1 className={`${styles.head1} text-5xl m-0`}>
                 Hello
               </h1>
               <p>If you have an account, login here </p>
               <button
-                className={`${styles.ghost}`}
-                id="login"
+                className={`${styles.ghost} ${styles.btn}`}
                 onClick={() => setIsRightPanelActive(false)}
               >
                 Login
@@ -59,14 +58,14 @@ export default function Register() {
               </button>
             </div>
             <div className={`${styles["overlay-panel"]} ${styles["overlay-right"]}`}>
-              <h1 className='text-5xl m-0'>
+              <h1 className={`${styles.head1} text-5xl m-0 `}>
                 Start your <br /> journey now
               </h1>
               <p>
                 If you don't have an account yet, join us and start your journey.
               </p>
               <button
-                className={`${styles.ghost}`}
+                className={`${styles.ghost} ${styles.btn}`}
                 id="register"
                 onClick={() => setIsRightPanelActive(true)}
               >

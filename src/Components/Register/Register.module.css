@@ -4,58 +4,15 @@
   box-sizing: border-box;
 }
 
-/* body {
-  display: flex;
-  background-color: #f6f5f7;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: "Poppins", sans-serif;
-  overflow: hidden;
-  height: 100vh;
-} */
 
-h1 {
+.head1 {
   font-weight: 700;
   letter-spacing: -1.5px;
   margin: 0;
   margin-bottom: 15px;
 }
 
-h1.title {
-  font-size: 45px;
-  line-height: 45px;
-  margin: 0;
-  text-shadow: 0 0 10px rgba(16, 64, 74, 0.5);
-}
-
-p {
-  font-size: 14px;
-  font-weight: 100;
-  line-height: 20px;
-  letter-spacing: 0.5px;
-  margin: 20px 0 30px;
-  text-shadow: 0 0 10px rgba(16, 64, 74, 0.5);
-}
-
-span {
-  font-size: 14px;
-  margin-top: 25px;
-}
-
-a {
-  color: #333;
-  font-size: 14px;
-  text-decoration: none;
-  margin: 15px 0;
-  transition: 0.3s ease-in-out;
-}
-
-a:hover {
-  color: #4bb6b7;
-}
-
-.content {
+/* content {
   display: flex;
   width: 100%;
   height: 50px;
@@ -79,9 +36,9 @@ a:hover {
   font-size: 14px;
   user-select: none;
   padding-left: 5px;
-}
+} */
 
-button {
+.btn {
   position: relative;
   border-radius: 20px;
   border: 1px solid #4bb6b7;
@@ -96,44 +53,44 @@ button {
   transition: 0.3s ease-in-out;
 }
 
-button:hover {
+.btn:hover {
   letter-spacing: 3px;
 }
 
-button:active {
+.btn:active {
   transform: scale(0.95);
 }
 
-button:focus {
+.btn:focus {
   outline: none;
 }
 
-button.ghost {
+.btn .ghost {
   background-color: rgba(225, 225, 225, 0.2);
   border: 2px solid #fff;
   color: #fff;
 }
 
-button.ghost i{
+.btn.ghost i{
   position: absolute;
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
 
-button.ghost i.register{
+.btn.ghost i.register{
   right: 70px;
 }
 
-button.ghost i.login{
+.btn.ghost i.login{
   left: 70px;
 }
 
-button.ghost:hover i.register{
+.btn.ghost:hover i.register{
   right: 40px;
   opacity: 1;
 }
 
-button.ghost:hover i.login{
+.btn.ghost:hover i.login{
   left: 40px;
   opacity: 1;
 }
@@ -149,7 +106,7 @@ form {
   text-align: center;
 }
 
-input {
+.input {
   background-color: #eee;
   border-radius: 10px;
   border: none;
@@ -233,7 +190,6 @@ input {
 }
 
 .overlay {
-  /* background-image: url('image/image.gif'); */
   background-color: #4bb6b7;
   background-repeat: no-repeat;
   background-size: cover;
