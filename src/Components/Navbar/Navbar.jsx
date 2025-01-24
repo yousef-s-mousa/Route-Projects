@@ -1,8 +1,21 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Usercontext } from '../../Context/UserContext'
 
 export default function Navbar() {
-  const [ isOpen,setIsOpen]=useState(false)
+  const [ isOpen,setIsOpen]=useState(false);
+  let{userToken ,setUserToken}=useContext(Usercontext)
+  let navigat=useNavigate()
+
+
+
+
+  function logout(){
+    localStorage.removeItem('userToken');
+    setUserToken(null);
+    navigat('/')
+
+  }
   return <>
   <header className="fixed inset-x-0 top-0 z-[1111] bg-[#afcbff]">
   <nav className="flex items-center justify-between p-6 py-2 lg:px-8" aria-label="Global">
@@ -18,16 +31,17 @@ export default function Navbar() {
         </svg>
       </button>
     </div>
-    <div className="hidden lg:flex lg:gap-x-3">
+    {userToken &&     <div className="hidden lg:flex lg:gap-x-3">
       <NavLink to={'home'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2] ">Home</NavLink>
       <NavLink to={'cart'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Cart</NavLink>
       <NavLink to={'categories'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Categories</NavLink>
       <NavLink to={'brands'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Brands</NavLink>
       <NavLink to={'products'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Products</NavLink>
 
-    </div>
+    </div>}
     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-      <NavLink to={''} className="text-sm/6 font-semibold text-gray-900 m-0"><button className='bg-[#d7f9ff] p-2 m-0 text-[#0e1c36] rounded-lg hover:bg-[#f9fbf2] duration-100'>Log in / Sign up</button></NavLink>
+      {userToken ? <span onClick={logout} className='text-sm/6 font-semibold text-gray-900 mx-2'><button className='bg-[#4F46E5] p-2 m-0 text-[#fff] rounded-lg hover:bg-[#f9fbf2] hover:text-[#0e1c36] duration-100'>Logout</button></span> :
+            <NavLink to={''} className="text-sm/6 font-semibold text-gray-900 m-0"><button className='bg-[#4F46E5] p-2 m-0 text-[#fff] rounded-lg hover:bg-[#f9fbf2] hover:text-[#0e1c36] duration-100'>Log in / Sign up</button></NavLink>}
     </div>
   </nav>
   {/* Mobile menu, show/hide based on menu open state. */}
