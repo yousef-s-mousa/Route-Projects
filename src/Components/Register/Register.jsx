@@ -92,10 +92,10 @@ async function login(values) {
           isRightPanelActive ? styles["right-panel-active"] : ""
         }`}
        >
-        <div className={`${styles["form-container"]} ${styles["register-container"]}`}>
+        <div className={`${styles["form-container"]} ${styles["register-container"]} `}>
           <form action="#" className={styles} onSubmit={formik.handleSubmit}>
             <h1 className={`${styles.head1} font-bold text-xl`}>Register here.</h1>
-            {apierror && <div className='p-1 bg-red-300 rounded-lg w-full'>{apierror}</div>}
+            {apierror && <div className='p-1 bg-red-300 rounded-lg w-full sm:text-sm'>{apierror}</div>}
             <input className={styles.input} type="text"  placeholder="Name" id='name' name='name' value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} />
             {formik.errors.name && formik.touched.name && <div className='p-1 bg-red-300 rounded-lg w-full'>{formik.errors.name}</div>}
             <input className={styles.input} type="email" placeholder="Email" id='email' name='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
@@ -137,7 +137,7 @@ async function login(values) {
   style={{ backgroundImage: `url(${layerimg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
  >
             <div className={`${styles["overlay-panel"]} ${styles["overlay-left"]}`}>
-              <h1 className={`${styles.head1} text-5xl m-0`}>
+              <h1 className={`${styles.head1} text-3xl m-0`}>
                 Hello
               </h1>
               <p>If you have an account, login here </p>
@@ -150,7 +150,7 @@ async function login(values) {
               </button>
             </div>
             <div className={`${styles["overlay-panel"]} ${styles["overlay-right"]}`}>
-              <h1 className={`${styles.head1} text-5xl m-0 `}>
+              <h1 className={`${styles.head1} text-3xl m-0 `}>
                 Start your <br /> journey now
               </h1>
               <p>
