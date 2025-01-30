@@ -18,11 +18,10 @@ export default function Register() {
    try{
     setloading(true)
   let {data}= await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup',values)
-  console.log(data);
   localStorage.setItem('userToken',data.token)
   setUserToken(data.token)
    setloading(false)
-   navigate('home')
+   navigate('/')
 }catch(err){
   setApiError(err.response.data.message)
   setloading(false) 
@@ -36,14 +35,12 @@ async function login(values) {
       'https://ecommerce.routemisr.com/api/v1/auth/signin',
       values
     );
-    console.log(data);
     localStorage.setItem('userToken', data.token);
     setUserToken(data.token)
     setloading(false);
-    navigate('home');
+    navigate('/');
   } catch (error) {
     setLoginApiError(error.response.data.message);
-    console.log(error.response.data.message)
     setloading(false);
   }
 }
@@ -52,8 +49,8 @@ async function login(values) {
  let validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is Requird').min(3,"min is 3 letters").max(15,'max is 15 letters'),
   email: Yup.string().required('Email is Requird').email('invalid email'),
-  password: Yup.string().required('Password is Requird').matches(/^[A-Z]\w{4,10}$/ ,' password must be atleast 6 characterst with uppercase' ),
-  rePassword: Yup.string().required('rePassword is Requird').oneOf([Yup.ref('password')], 'password & repassword must match'),
+  password: Yup.string().required('Password is Requird').matches(/^.{6,}$/,' password is week' ), /*/^[A-Z]\w{4,10}$/ ,*/
+  rePassword: Yup.string().required('rePassword is Requird').oneOf([Yup.ref('password')], 'repassword must match'),
   phone: Yup.string().required('phone is Requird').matches(/^01[0125][0-9]{8}$/, 'please enter an Egyption phone')
  })
 

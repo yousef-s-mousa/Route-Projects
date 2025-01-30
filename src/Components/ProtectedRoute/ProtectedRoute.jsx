@@ -6,7 +6,7 @@ export default function ProtectedRoute({children}) {
     return children
    }else{
 
-    return<Navigate to={'/'}/>
+    return<Navigate to={'login'}/>
 
    }
   

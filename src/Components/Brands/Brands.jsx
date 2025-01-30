@@ -1,9 +1,8 @@
 import React from 'react'
+import Loader from '../Loader/Loader'
 
 export default function Brands() {
   return <>
-      <h2>Brands</h2>
-      <button>asd-</button>
-    </>
-  
+<Loader/>
+</>
 }
