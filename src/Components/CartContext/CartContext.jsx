@@ -25,7 +25,7 @@ export default function CartContextProvider({children}){
       setCart(data)
       toast.success(data.message)
     }catch (error){
-      toast.error(data.message)
+
     }
 
   }
