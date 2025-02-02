@@ -19,19 +19,19 @@ export default function MainSlider() {
     <div className="w-9/12">
     <Slider {...settings}>
       <div>
-      <img className="w-full h-96 object-cover" src={img1} alt="food" />
+      <img className="w-full h-96 " src={img1} alt="food" />
       </div>
       <div>
-      <img className="w-full  h-96 object-cover" src={img2} alt="food" />
+      <img className="w-full  h-96 " src={img2} alt="food" />
       </div>
       <div>
-        <img className="w-full  h-96 object-cover" src={img3} alt="food" />
+        <img className="w-full  h-96 " src={img3} alt="food" />
       </div>
     </Slider>
     </div>
     <div className="w-3/12">
-    <div><img src={img2} className="w-full h-48" alt="food" /></div>
-    <div><img src={img3} className="w-full h-48" alt="food" /></div>
+    <div><img src={img2} className="w-full h-48 object-cover object-right" alt="food" /></div>
+    <div><img src={img3} className="w-full h-48 object-cover object-right" alt="food" /></div>
     </div>
    </div>
   );
