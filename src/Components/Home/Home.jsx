@@ -16,10 +16,14 @@ export default function Home() {
  function getAllProducts(page){
 return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=${page}`)
  }
- let {data , isLoading , isFetched , isError,error} =useQuery({
+ let {data , isLoading , isFetched , isError,error,refetch } =useQuery({
   queryKey: ['allProducts', currentPage],
   queryFn: () => getAllProducts(currentPage),
- })
+  keepPreviousData: true,
+ });
+ useEffect(() => {
+  refetch(); 
+}, [currentPage, refetch]);
 //  ///////////////////////////////// get pages number////////////////////////////////
   useEffect(() => {
     if (data?.data?.metadata?.numberOfPages) {
@@ -30,11 +34,13 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
       setNumOfPages(nums);
     }
   }, [data]);
-function getPageNumber(e){
-  let page=e.target.getAttribute('page');
-  setCurrentPage(parseInt(page,10));
+  function getPageNumber(e) {
+    let page = parseInt(e.target.getAttribute('page'), 10);
+    if (!isNaN(page)) {
+      setCurrentPage(page);
+    }
+  }
 // //////////////////////////////////////// DATA SHOW//////////////////////////////////////////////
-}
   return <>
    {isLoading && <Loader />}
 
@@ -76,12 +82,18 @@ function getPageNumber(e){
         </svg>
       </button>
     </li>
-    {numsPages?.map((pn)=>{
-        return   <li onClick={getPageNumber} key={pn}>
-        <button page={pn} className={`flex items-center justify-center px-3 h-8 leading-tight text-[#0E1C36] bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700
-          ${currentPage === pn ? 'bg-gray-400' : ''}`}>{pn}</button>
-      </li>
-      })}
+    {numsPages?.map((pn) => (
+  <li key={pn} onClick={getPageNumber}>
+    <button
+      page={pn}
+      className={`flex items-center justify-center px-3 h-8 leading-tight text-[#0E1C36] bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ${
+        currentPage === pn ? 'bg-gray-500 text-white' : ''
+      }`}
+    >
+      {pn}
+    </button>
+  </li>
+))}
     <li>
       <button  className="flex items-center justify-center px-3 h-8 leading-tight text-[#0E1C36] bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700" onClick={() =>
     setCurrentPage((prev) => Math.min(prev + 1, numsPages.length))

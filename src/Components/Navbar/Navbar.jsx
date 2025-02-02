@@ -33,11 +33,11 @@ export default function Navbar() {
       </button>
     </div>
     {userToken &&     <div className="hidden lg:flex lg:gap-x-3">
-      <NavLink to={'/'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2] ">Home</NavLink>
-      <NavLink to={'cart'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Cart</NavLink>
-      <NavLink to={'categories'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Categories</NavLink>
-      <NavLink to={'brands'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Brands</NavLink>
-      <NavLink to={'products'} className="text-sm/6 font-bold text-[#0e1c36] hover:text-[#f9fbf2]">Products</NavLink>
+      <NavLink to={'/'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Home</NavLink>
+      <NavLink to={'cart'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Cart</NavLink>
+      <NavLink to={'categories'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Categories</NavLink>
+      <NavLink to={'brands'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Brands</NavLink>
+      <NavLink to={'products'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Products</NavLink>
 
     </div>}
     <div className="hidden lg:flex lg:flex-1 lg:justify-end">

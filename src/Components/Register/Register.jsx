@@ -6,14 +6,31 @@ import * as Yup from 'yup'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Usercontext } from '../../Context/UserContext';
+import { useEffect } from 'react';
 
 export default function Register() {
   const [isRightPanelActive, setIsRightPanelActive] = useState(true);
   const [apierror , setApiError]=useState(null)
   const [loginapierror , setLoginApiError]=useState(null)
   const [loading ,setloading]=useState(false)
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLoginFrom,setLoginForm]=useState(false);
   let navigate=useNavigate();
   let{setUserToken}=useContext(Usercontext)
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    };
+    
+    // Initialize on load
+    handleResize();
+
+    // Add event listener for resizing
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   async function register(values){
    try{
     setloading(true)
@@ -83,7 +100,151 @@ async function login(values) {
 /////////////////////////////////////////////////////////////////////////////////
   return (
     <>
-    <section className='reg'>
+    {isMobile ? (
+         <section className='flex justify-center items-center h-screen'>
+         <div className="p-6 rounded-lg shadow-md w-full max-w-sm"
+         style={{ backgroundImage: `url(${layerimg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+         {!isLoginFrom? (
+          <> 
+         <h1 className="text-2xl font-bold mb-6 text-center text-white">Register here.</h1>
+
+{apierror && <div className='p-1 bg-red-300 rounded-lg mb-4'>{apierror}</div>}
+
+<form onSubmit={formik.handleSubmit} className="space-y-4 bg-transparent">
+  <input
+    type="text"
+    placeholder="Name"
+    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+    id="name"
+    name="name"
+    value={formik.values.name}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+  />
+  {formik.errors.name && formik.touched.name && <div className='text-red-500 text-sm'>{formik.errors.name}</div>}
+
+  <input
+    type="email"
+    placeholder="Email"
+    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+    id="email"
+    name="email"
+    value={formik.values.email}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+  />
+  {formik.errors.email && formik.touched.email && <div className='text-red-500 text-sm'>{formik.errors.email}</div>}
+
+  <input
+    type="password"
+    placeholder="Password"
+    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+    id="password"
+    name="password"
+    value={formik.values.password}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+  />
+  {formik.errors.password && formik.touched.password && <div className='text-red-500 text-sm'>{formik.errors.password}</div>}
+
+  <input
+    type="password"
+    placeholder="Re-enter Password"
+    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+    id="rePassword"
+    name="rePassword"
+    value={formik.values.rePassword}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+  />
+  {formik.errors.rePassword && formik.touched.rePassword && <div className='text-red-500 text-sm'>{formik.errors.rePassword}</div>}
+
+  <input
+    type="tel"
+    placeholder="Phone"
+    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+    id="phone"
+    name="phone"
+    value={formik.values.phone}
+    onChange={formik.handleChange}
+    onBlur={formik.handleBlur}
+  />
+  {formik.errors.phone && formik.touched.phone && <div className='text-red-500 text-sm'>{formik.errors.phone}</div>}
+
+  <button 
+    type="submit" 
+    className='py-2 px-6 bg-[#4bb6b7] rounded-xl text-white text-xl w-full text-center'
+    disabled={loading}
+  >
+    {loading ? (
+      <i className="fas fa-spinner fa-spin"></i>
+    ) : (
+      "Register"
+    )}
+  </button>
+  <div className="mt-6 text-center">
+              <p className="text-white">Already have an account?</p>
+              <button
+                onClick={() => setLoginForm(true)}
+                className="text-[#4bb6b7] hover:text-[#4a9b9a] focus:outline-none font-bold"
+              >
+                Login here
+              </button>
+            </div>
+  
+</form></>) : (<>
+  <h1 className="text-2xl font-bold mb-6 text-center text-white mt-8">Login here.</h1>
+        
+        {loginapierror && <div className='p-1 bg-red-300 rounded-lg mb-4'>{loginapierror}</div>}
+
+        <form onSubmit={loginFormik.handleSubmit} className="space-y-4 bg-transparent">
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+            id="email"
+            name="email"
+            value={loginFormik.values.email}
+            onChange={loginFormik.handleChange}
+            onBlur={loginFormik.handleBlur}
+          />
+          {loginFormik.errors.email && loginFormik.touched.email && <div className='text-red-500 text-sm'>{loginFormik.errors.email}</div>}
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-main"
+            id="password"
+            name="password"
+            value={loginFormik.values.password}
+            onChange={loginFormik.handleChange}
+            onBlur={loginFormik.handleBlur}
+          />
+          {loginFormik.errors.password && loginFormik.touched.password && <div className='text-red-500 text-sm'>{loginFormik.errors.password}</div>}
+
+          <button 
+            type="submit" 
+            className="py-2 px-6 bg-[#4bb6b7] rounded-xl text-white text-xl w-full text-center"
+            disabled={loading}
+          >
+            {loading ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              "Log in"
+            )}
+          </button>
+          <p className="text-white">Don't have an account?</p>
+              <button
+                onClick={() => setLoginForm(false)}
+                className="text-[#4bb6b7] hover:text-[#4a9b9a] focus:outline-none font-bold"
+              >
+                Register here
+              </button>
+        </form></>)}       
+      </div>
+  </section>
+        ):
+    (<section className='reg'>
       <div
         className={`${styles.container} ${
           isRightPanelActive ? styles["right-panel-active"] : ""
@@ -164,7 +325,8 @@ async function login(values) {
           </div>
         </div>
       </div>
-      </section>
+      </section>)}
     </>
   );
 }
+
