@@ -14,6 +14,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ProductDetails from './Components/ProductDetails/ProductDetails.jsx'
 import CartContextProvider from './Components/CartContext/CartContext.jsx'
 import { Toaster } from 'react-hot-toast'
+import CheckOut from './Components/CheckOut/CheckOut.jsx'
+import AllOrders from './Components/AllOrders/AllOrders.jsx'
 
 const routers = createHashRouter([{
   path: '/' , element: <Layout/>, children:[
@@ -25,6 +27,8 @@ const routers = createHashRouter([{
     {path:'brands', element:<ProtectedRoute><Brands/></ProtectedRoute>},
     {path:'products', element:<ProtectedRoute><Products/></ProtectedRoute>},
     {path:'productsdetails/:id', element:<ProtectedRoute><ProductDetails/></ProtectedRoute>},
+    {path:'checkout', element:<ProtectedRoute><CheckOut/></ProtectedRoute>},
+    {path:'allorders', element:<ProtectedRoute><AllOrders/></ProtectedRoute>},
    
    ]
 }])

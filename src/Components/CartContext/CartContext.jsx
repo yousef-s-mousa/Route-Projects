@@ -1,33 +1,106 @@
-import { useQuery } from '@tanstack/react-query';
+import { createContext, useState } from 'react';
 import axios from 'axios';
-import React, { createContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useQueryClient , useQuery } from '@tanstack/react-query';
 
-export let CartContext = createContext();
+export const CartContext = createContext();
 
 export default function CartContextProvider({ children }) {
   const [cart, setCart] = useState(null);
+  const queryClient = useQueryClient();
+  const token = localStorage.getItem('userToken')
 
-  const headers = {
-    token: localStorage.getItem('userToken') || '',
-  };
+  
 
   async function addProductToCart(productId) {
     try {
-      let { data } = await axios.post(
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        toast.error('No Token Found');
+        return;
+      }
+
+      const { data } = await axios.post(
         'https://ecommerce.routemisr.com/api/v1/cart',
         { productId },
-        { headers }
+        { headers: { token } }
       );
-      setCart(data.data); // Ensure the correct data is stored
-      toast.success(data.message);
+      queryClient.invalidateQueries(['CartProducts']);
+      toast.success(data.message || 'Product added successfully');
     } catch (error) {
+      console.error('Error adding product to cart:', error);
       toast.error(error.response?.data?.message || 'Something went wrong');
     }
   }
 
+
+
+  async function updateCartCount(productId, count) {
+    try {
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        toast.error('No Token Found');
+        return;
+      }
+  
+      const { data } = await axios.put(
+        `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
+        { count },
+        { headers: { token } }
+      );
+  
+      setCart(data);
+  
+      queryClient.invalidateQueries(['CartProducts']);
+  
+      toast.success(data.message || 'Cart updated successfully', {
+        duration: 1000,
+      });
+    } catch (error) {
+      console.error('Error changing count:', error);
+      toast.error(error.response?.data?.message || 'Something went wrong');
+    }
+  }
+
+
+  async function deleteCartItem(productId) {
+    try {
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        toast.error('No Token Found');
+        return;
+      }
+  
+      const { data } = await axios.delete(
+        `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
+        { headers: { token } }
+      );
+  
+      setCart(data);
+  
+      queryClient.invalidateQueries(['CartProducts']);
+  
+      toast.success(data.message || 'Item Deleted ', {
+        duration: 1000,
+      });
+    } catch (error) {
+      console.error('Error Deleting item:', error);
+      toast.error(error.response?.data?.message || 'Something went wrong');
+    }
+  }
+
+  function getCart() {
+    return axios.get('https://ecommerce.routemisr.com/api/v1/cart', {headers:{token}});
+  }
+   let {data,isLoading,isError} =useQuery({
+    queryKey: ['CartProducts'],
+    queryFn: getCart,
+   });
+
+  //  console.log(data?.data);
+
   return (
-    <CartContext.Provider value={{ addProductToCart, cart }}>
+    <CartContext.Provider value={{ addProductToCart, cart , getCart, data, isLoading, isError,updateCartCount , deleteCartItem}}>
       {children}
     </CartContext.Provider>
   );

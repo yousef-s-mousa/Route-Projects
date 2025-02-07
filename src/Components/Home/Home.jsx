@@ -22,7 +22,6 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
   keepPreviousData: true,
  });
  useEffect(() => {
-  refetch(); 
 }, [currentPage, refetch]);
 //  ///////////////////////////////// get pages number////////////////////////////////
   useEffect(() => {
@@ -35,7 +34,7 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
     }
   }, [data]);
   function getPageNumber(e) {
-    let page = parseInt(e.target.getAttribute('page'), 10);
+    let page = parseInt(e.target.getAttribute('data-page'), 10);
     if (!isNaN(page)) {
       setCurrentPage(page);
     }
@@ -85,9 +84,9 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
     {numsPages?.map((pn) => (
   <li key={pn} onClick={getPageNumber}>
     <button
-      page={pn}
+      data-page={pn}
       className={`flex items-center justify-center px-3 h-8 leading-tight text-[#0E1C36] bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ${
-        currentPage === pn ? 'bg-gray-500 text-white' : ''
+        currentPage === pn ? ' bg-gray-200 font-bold' : ''
       }`}
     >
       {pn}
