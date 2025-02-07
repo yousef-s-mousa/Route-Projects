@@ -72,10 +72,11 @@ export default function Navbar() {
         <div className="-my-6 divide-y divide-gray-500/10">
         {userToken && <div className="space-y-2 py-6">
             <NavLink onClick={()=> setIsOpen(false)} to={'/'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Home</NavLink>
-            <NavLink onClick={()=> setIsOpen(false)} to={'cart'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Cart <span className='text-[#4F46E5] inline-flex items-center justify-center w-5 h-5 text-xs font-bold  bg-white border-2 border-[#726EEB] rounded-full m-0 p-0'>{data?.data.numOfCartItems}</span></NavLink>
-            <NavLink onClick={()=> setIsOpen(false)} to={'categories'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Categories</NavLink>
-            <NavLink onClick={()=> setIsOpen(false)} to={'brands'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Brands</NavLink>
-            <NavLink onClick={()=> setIsOpen(false)} to={'products'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Products</NavLink>
+            <NavLink onClick={()=> setIsOpen(false)} to={'/cart'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Cart <span className='text-[#4F46E5] inline-flex items-center justify-center w-5 h-5 text-xs font-bold  bg-white border-2 border-[#726EEB] rounded-full m-0 p-0'>{data?.data.numOfCartItems}</span></NavLink>
+            <NavLink onClick={()=> setIsOpen(false)} to={'/categories'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Categories</NavLink>
+            <NavLink onClick={()=> setIsOpen(false)} to={'/brands'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Brands</NavLink>
+            <NavLink onClick={()=> setIsOpen(false)} to={'/products'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Products</NavLink>
+            <NavLink onClick={()=> setIsOpen(false)} to={'/allorders'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Orders</NavLink>
           </div>}
           <div className="py-6">
           {userToken ? <span onClick={() => { logout(); setIsOpen(false); }}  className='-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]'>Logout</span> :
