@@ -48,7 +48,7 @@ const scrollToTop = () => {
           All Orders</li>
       </ul>
     </div>
-   {data?.data.map((order)=>{ 
+   {data?.data.slice().reverse().map((order)=>{ 
     return <div key={order.id} className="mt-7 border border-gray-300 pt-9">
       <div className="flex max-md:flex-col items-center justify-between px-3 md:px-11">
         <div className="data">
@@ -58,7 +58,7 @@ const scrollToTop = () => {
       <svg className="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width={1216} height={2} viewBox="0 0 1216 2" fill="none">
         <path d="M0 1H1216" stroke="#D1D5DB" />
       </svg>
-      {order.cartItems.map((item ,index) => (
+      {order.cartItems.map((item) => (
       <React.Fragment key={item._id}> 
         <div className="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11 ">
         <div className="grid grid-cols-4 w-full">

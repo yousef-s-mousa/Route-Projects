@@ -50,15 +50,19 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
     )}
 
    {!isLoading && !isError && (
-   <div className=' w-10/12 mx-auto my-6'>
+   <div className=' w-12/12 mx-auto mb-12 '>
          <MainSlider/>
+         <h2 className=' text-4xl font-bold text-[#AFCBFF] mt-3 text-center capitalize'>our categories</h2>
+         <div className='w-11/12 mx-auto'>
          <CategorySlider/>
-   <div className=' flex flex-wrap gap-y-4 mt-12'>
+         </div>
+   <h2 className='text-4xl font-bold text-[#AFCBFF] capitalize my-3  w-10/12 m-auto '>our products</h2>
+   <div className=' flex flex-wrap gap-y-4  w-10/12 m-auto'>
     {data?.data.data.map((product)=>{
       return  <div key={product.id} className=' lg:w-1/6 md:w-1/4 sm:w-full '>
        <div className='product p-4 px-5 rounded group '>
        <Link to={`/productsdetails/${product.id}`}>
-       <img src={product.imageCover} alt={product.title} className='w-full' />
+       <img src={product.imageCover} alt={product.title} className='w-full ' />
        <h3 className='text-main '>{product.category.name}</h3>
        <h2 className='text-2xl group-hover:text-[#726EEB]'>{product.title.split(' ').slice(0,2).join(' ')}</h2>
        <div className='flex justify-between my-1'>

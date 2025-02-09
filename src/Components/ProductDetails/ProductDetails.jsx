@@ -29,15 +29,15 @@ export default function ProductDetails() {
   return <>
   {isLoading? <Loader/>:
     <div className='w-10/12 mx-auto my-6'>
-      <div  className='flex justify-between items-center gap-3'>
-        <div className='w-4/12 '>
+      <div  className='flex flex-col md:flex-row justify-between items-center gap-3'>
+        <div className='w-full md:w-4/12 '>
         <Slider {...settings}>
           {data.data.data.images.map((image)=>{
         return <img key={id} className='w-full' src={image} alt="" />
        })}
         </Slider>
         </div>
-        <div className='w-8/12'>
+        <div className='w-full md:w-8/12 text-center md:text-left'>
          <h2 className='text-3xl my-6'>{data.data.data.title}</h2>
          <p className='text-gray-500 my-6'>{data.data.data.description}</p>
          <span>{data.data.data.category.name}</span>

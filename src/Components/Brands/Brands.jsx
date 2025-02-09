@@ -24,8 +24,8 @@ export default function BrandCarousels() {
   );
 
   return <>
-{isLoading ? <Loader/> :     <div className="container mx-auto px-4">
-  <h2 className="text-xl font-bold mb-4 text-[#726EEB] uppercase">our brands </h2>
+{isLoading ? <Loader/> :     <div className="w-11/12 mx-auto my-12 px-4">
+  <h2 className="text-3xl font-bold mb-4 text-[#726EEB] uppercase">our brands </h2>
   {carousels.map((carousel, index) => {
 
     const sliderSettings = {
@@ -70,17 +70,19 @@ export default function BrandCarousels() {
       <div key={index} className="my-6">
         <Slider {...sliderSettings}>
           {carousel.map((brand) => (
-            <div
-              key={brand._id}
+             <a key={brand._id} href={`https://www.${brand.name}.com`} target="blank">
+              <div
+             
               className="p-4 border rounded-lg border-[#726EEB] shadow-xl flex flex-col items-center"
             >
               <img
                 src={brand.image}
                 alt={brand.name}
-                className="w-32 h-32 object-contain"
+                className="object-contain object-center"
               />
               <p className="mt-2 font-bold text-center text-[#726EEB]">{brand.name}</p>
             </div>
+    </a>
           ))}
         </Slider>
       </div>

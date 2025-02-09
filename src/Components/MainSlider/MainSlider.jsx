@@ -1,38 +1,36 @@
 import React from "react";
 import Slider from "react-slick";
-import img1 from '../../assets/slider-image-1.jpeg'
-import img2 from '../../assets/slider-image-2.jpeg'
-import img3 from '../../assets/slider-image-3.jpeg'
-
+import img1 from '../../assets/adidas.jpg'
+import img2 from '../../assets/non.jpg'
+import img3 from '../../assets/banner-4.jpeg'
 export default function MainSlider() {
   var settings = {
     infinite: true,
-    speed: 500,
+    speed: 700,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     autoplaySpeed: 2000,
     autoplay:true,
   };
-  return (
+  return <>
    <div className="flex">
-    <div className="w-9/12">
+    <div className="w-full">
     <Slider {...settings}>
-      <div>
-      <img className="w-full h-96 " src={img1} alt="food" />
+      <div className="relative"> 
+      <button type="button" className="absolute bottom-1/4 left-20 text-white  bg-[#268FD3] border border-[#268FD3]  hover:bg-transparent   font-bold rounded-full text-sm px-12 py-3  ">Shop Now</button>
+      <img className="w-full h-[400px]  object-fit  " src={img1} alt="food" />
       </div>
-      <div>
-      <img className="w-full  h-96 " src={img2} alt="food" />
+      <div className="relative">
+      <button type="button" className="absolute bottom-1/4 left-1/2  text-white  bg-[#00FC8F] border border-[#00FC8F]  hover:bg-transparent   font-bold rounded-full text-sm px-12 py-3  ">Shop Now</button>
+      <img className="w-full h-[400px] object-fit  " src={img2} alt="food" />
       </div>
-      <div>
-        <img className="w-full  h-96 " src={img3} alt="food" />
+      <div className="relative"> 
+      <button type="button" className="absolute bottom-1/2 left-1/4  text-white  bg-[#B0A690] border border-[#B0A690]  hover:bg-transparent   font-bold rounded-full text-sm px-12 py-3  ">Shop Now</button>
+        <img className="w-full  h-[400px] object-fit" src={img3} alt="food" />
       </div>
     </Slider>
     </div>
-    <div className="w-3/12">
-    <div><img src={img2} className="w-full h-48 object-cover object-right" alt="food" /></div>
-    <div><img src={img3} className="w-full h-48 object-cover object-right" alt="food" /></div>
-    </div>
    </div>
-  );
+  </>
 }

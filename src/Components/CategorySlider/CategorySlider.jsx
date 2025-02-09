@@ -17,11 +17,12 @@ export default function CategorySlider() {
          var settings = {
             dots: false,
             infinite: true,
-            speed: 500,
+            speed: 2000,
             slidesToShow: 6,
             slidesToScroll: 6,
-            autoautoplay: true,
-            autoplaySpeed: 2000,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            arrows: false,
             responsive: [
               {
                 breakpoint: 1024,
@@ -54,9 +55,9 @@ export default function CategorySlider() {
       <Slider {...settings}>
         {data?.data.data.map((cata) => {
           return (
-            <div key={cata._id} className="my-6 border border-violet-100">
-              <img src={cata.image} className="h-48 w-full object-fit" alt="" />
-              <h5 className="text-center text-gray-700">{cata.name}</h5>
+            <div key={cata._id} className="my-6">
+              <img src={cata.image} className="h-48 w-full object-cover object-center" alt="" />
+              <h5 className="text-center font-bold text-gray-700">{cata.name}</h5>
             </div>
           );
         })}

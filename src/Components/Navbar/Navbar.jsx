@@ -34,7 +34,7 @@ export default function Navbar() {
         </svg>
       </button>
     </div>
-    {userToken &&     <div className="hidden lg:flex lg:gap-x-3">
+    {userToken &&     <div className="hidden lg:flex flex-grow justify-end me-20 gap-x-6">
       <NavLink to={'/'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Home</NavLink>
       <NavLink to={'/categories'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Categories</NavLink>
       <NavLink to={'/brands'} className={({ isActive }) => `text-sm/6 font-bold hover:text-[#f9fbf2] ${isActive ? "text-white " : "text-[#0e1c36]"}`}>Brands</NavLink>
