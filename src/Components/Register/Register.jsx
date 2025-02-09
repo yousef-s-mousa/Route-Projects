@@ -244,7 +244,7 @@ async function login(values) {
       </div>
   </section>
         ):
-    (<section className='reg'>
+    (<section className='reg my-10'>
       <div
         className={`${styles.container} ${
           isRightPanelActive ? styles["right-panel-active"] : ""

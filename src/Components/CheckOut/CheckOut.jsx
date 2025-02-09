@@ -12,16 +12,20 @@ export default function CheckOut() {
   const [paymentMethod, setPaymentMethod] = useState('visa'); 
   const navigate = useNavigate();
 
-  function checkOutCart(shippingAddress, method) {
+  function checkOutCart(shippingAddress, method, visaUrl = "https://yousef-s-mousa.github.io/Route-Projects/#") {
     const baseUrl = `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${data?.data?.cartId}`;
-    const url = method === 'visa' ? `${baseUrl}?url=https://yousef-s-mousa.github.io/Route-Projects/#` : baseUrl; 
+
+    const params = method === 'visa' ? { url: visaUrl } : {};
 
     return axios.post(
-      url,
+      baseUrl,
       { shippingAddress },
-      { headers: { token } }
+      { 
+        headers: { token }, 
+        params: params 
+      }
     );
-  }
+}
 
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ shippingAddress, method }) => checkOutCart(shippingAddress, method),
