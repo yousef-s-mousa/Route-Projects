@@ -14,7 +14,7 @@ export default function CheckOut() {
 
   function checkOutCart(shippingAddress, method) {
     const baseUrl = `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${data?.data?.cartId}`;
-    const url = method === 'visa' ? `${baseUrl}?url=https://yousef-s-mousa.github.io/Route-Projects/` : baseUrl; 
+    const url = method === 'visa' ? `${baseUrl}?url=https://yousef-s-mousa.github.io/Route-Projects/#` : baseUrl; 
 
     return axios.post(
       url,
