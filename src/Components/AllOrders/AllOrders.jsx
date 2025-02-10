@@ -41,7 +41,7 @@ const scrollToTop = () => {
   return <>
 { isLoading? <Loader/>: <section className="py-24 relative">
   <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
-    <h2 className="font-manrope font-extrabold text-3xl lead-10 text-black mb-9">Order History</h2>
+    <h2 className="font-manrope font-extrabold text-3xl lead-10 text-[#726EEB] mb-9">Order History</h2>
     <div className="flex sm:flex-col lg:flex-row sm:items-center justify-between">
       <ul className="flex max-sm:flex-col sm:items-center gap-x-14 gap-y-3">
         <li className="font-medium text-3xl leading-8 cursor-pointer text-indigo-600 transition-all duration-500 hover:text-indigo-600">

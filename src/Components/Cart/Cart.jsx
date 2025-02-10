@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query'
 import React, { useContext } from 'react'
 import Loader from '../Loader/Loader';
 import { CartContext } from '../CartContext/CartContext';
@@ -6,12 +5,15 @@ import { Link } from 'react-router-dom';
 
 export default function Cart() {
 
-  const { getCart, data, isLoading, isError , updateCartCount ,deleteCartItem} = useContext(CartContext);
-
-
+  const { error,data, isLoading, isError , updateCartCount ,deleteCartItem} = useContext(CartContext);
+ 
   
   return <>
-{isLoading? <Loader/> :
+{isLoading ? (
+  <Loader />
+) : isError ? (
+  <p className="text-red-500 text-center">{error}</p>
+) : 
   <section className="bg-white py-8 antialiased  md:py-16">
   <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
     <h2 className="text-xl font-semibold text-[#726EEB] sm:text-2xl">Shopping Cart</h2>

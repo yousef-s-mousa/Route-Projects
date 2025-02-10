@@ -21,7 +21,7 @@ export default function Categories() {
 
   return (
     <div className="my-8 text-center">
-      <h2 className="text-4xl font-bold text-[#AFCBFF] capitalize my-3">Our Categories</h2>
+      <h2 className="text-4xl font-bold text-[#726EEB] capitalize my-3">Our Categories</h2>
       {categories?.map((category) => (
         <SubCategorySlider key={category._id} category={category} />
       ))}

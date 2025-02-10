@@ -56,7 +56,7 @@ export default function CategorySlider() {
         {data?.data.data.map((cata) => {
           return (
             <div key={cata._id} className="my-6">
-              <img src={cata.image} className="h-48 w-full object-cover object-center" alt="" />
+              <img src={cata.image} className="h-48 w-full object-cover" alt="" />
               <h5 className="text-center font-bold text-gray-700">{cata.name}</h5>
             </div>
           );

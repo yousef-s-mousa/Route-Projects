@@ -12,6 +12,18 @@ export default function CartContextProvider({ children }) {
 
   
 
+
+  function getCart() {
+    return axios.get('https://ecommerce.routemisr.com/api/v1/cart', {headers:{token}});
+  }
+   let {data,isLoading,isError,error} =useQuery({
+    queryKey: ['CartProducts'],
+    queryFn: getCart,
+   });
+
+
+
+
   async function addProductToCart(productId) {
     try {
       const token = localStorage.getItem('userToken');
@@ -89,18 +101,12 @@ export default function CartContextProvider({ children }) {
     }
   }
 
-  function getCart() {
-    return axios.get('https://ecommerce.routemisr.com/api/v1/cart', {headers:{token}});
-  }
-   let {data,isLoading,isError} =useQuery({
-    queryKey: ['CartProducts'],
-    queryFn: getCart,
-   });
+  
+   
 
-  //  console.log(data?.data);
 
   return (
-    <CartContext.Provider value={{ addProductToCart, cart , getCart, data, isLoading, isError,updateCartCount , deleteCartItem}}>
+    <CartContext.Provider value={{ addProductToCart, cart , error, getCart, data, isLoading, isError,updateCartCount , deleteCartItem}}>
       {children}
     </CartContext.Provider>
   );

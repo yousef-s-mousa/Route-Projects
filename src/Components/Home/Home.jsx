@@ -1,15 +1,15 @@
 import React, { useContext, useState ,useEffect } from 'react'
-import { Usercontext } from '../../Context/UserContext'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import Loader from '../Loader/Loader'
 import MainSlider from '../MainSlider/MainSlider'
 import CategorySlider from '../CategorySlider/CategorySlider'
 import { Link } from 'react-router-dom'
-import ProductDetails from '../ProductDetails/ProductDetails'
 import { CartContext } from '../CartContext/CartContext'
+import { WishlistContext } from '../WishListContext/WishListContext'
 // //////////////////////////////////////////////// API DATA///////////////////////////////
 export default function Home() {
+  const{ addProductToWishList }=useContext(WishlistContext)
   const [numsPages,setNumOfPages]=useState([])
   const [currentPage, setCurrentPage] = useState(1);
   let {addProductToCart}=useContext(CartContext)
@@ -52,23 +52,26 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
    {!isLoading && !isError && (
    <div className=' w-12/12 mx-auto mb-12 '>
          <MainSlider/>
-         <h2 className=' text-4xl font-bold text-[#AFCBFF] mt-3 text-center capitalize'>our categories</h2>
+         <h2 className=' text-4xl font-bold text-[#726EEB] mt-3 text-center capitalize'>our categories</h2>
          <div className='w-11/12 mx-auto'>
          <CategorySlider/>
          </div>
-   <h2 className='text-4xl font-bold text-[#AFCBFF] capitalize my-3  w-10/12 m-auto '>our products</h2>
+   <h2 className='text-4xl font-bold text-[#726EEB] capitalize my-3  w-10/12 m-auto '>our products</h2>
    <div className=' flex flex-wrap gap-y-4  w-10/12 m-auto'>
     {data?.data.data.map((product)=>{
       return  <div key={product.id} className=' lg:w-1/6 md:w-1/4 sm:w-full '>
        <div className='product p-4 px-5 rounded group '>
-       <Link to={`/productsdetails/${product.id}`}>
-       <img src={product.imageCover} alt={product.title} className='w-full ' />
-       <h3 className='text-main '>{product.category.name}</h3>
+       <div className='relative '> <Link to={`/productsdetails/${product.id}`}>
+       <img src={product.imageCover} alt={product.title} className='w-full ' /></Link>
+       <button onClick={()=> addProductToWishList(product.id)} className='rounded-full h-6 w-6 bg-transparent opacity-0 duration-300 group-hover:opacity-100 border border-red-500 flex justify-center items-center group/love hover:bg-red-500 absolute top-1 right-2 z-10'>
+       <i className='fa fa-heart text-red-500 text-sm  group-hover/love:text-white'></i></button>
+       </div>
+       <h3 className='text-main '>{product.category.name}</h3> 
        <h2 className='text-2xl group-hover:text-[#726EEB]'>{product.title.split(' ').slice(0,2).join(' ')}</h2>
        <div className='flex justify-between my-1'>
         <span>{product.price}EGP</span>
         <span><i className='fa-solid fa-star text-yellow-300'></i>{product.ratingsAverage}</span>
-       </div></Link>
+       </div>
        <button onClick={()=> addProductToCart(product.id)} className='btn bg-[#4F46E5] w-full p-1 rounded text-[#F9FBF2] hover:bg-[#726EEB]'> add to cart</button>
       </div>
       </div>
@@ -110,6 +113,8 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
   </ul>
 </nav>
 {/* ////////////////////////////////////////////////////////////////////////////// */}
+
+
 
  </div>
 )
