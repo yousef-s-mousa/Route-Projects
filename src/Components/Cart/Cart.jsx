@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 
 export default function Cart() {
 
+
   const { error,data, isLoading, isError , updateCartCount ,deleteCartItem} = useContext(CartContext);
    
   return <>
 {isLoading ? (
   <Loader />
 ) : isError ? (
-  <p className="text-red-500 text-center">{error}</p>
+  <p className="text-red-500 text-center">{error?.message || "An unexpected error occurred"}</p>
 ) : 
   <section className="bg-white py-8 antialiased  md:py-16">
   <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">

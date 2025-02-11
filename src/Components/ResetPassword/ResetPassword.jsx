@@ -22,7 +22,7 @@ export default function ResetPassword() {
       setUserToken(data.token)
       setSuccessMessage("Password reset successful! Redirecting...");
       setErrorMessage("");
-     
+      
       
       // Redirect to homepage after 2 seconds
       setTimeout(() => navigate("/"), 2000);

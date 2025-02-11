@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useQueryClient , useQuery } from '@tanstack/react-query';
@@ -10,18 +10,17 @@ export default function CartContextProvider({ children }) {
   const queryClient = useQueryClient();
   const token = localStorage.getItem('userToken')
 
-  
+
 
 
   function getCart() {
     return axios.get('https://ecommerce.routemisr.com/api/v1/cart', {headers:{token}});
   }
-   let {data,isLoading,isError,error} =useQuery({
+  let { data, isLoading, isError, error } = useQuery({
     queryKey: ['CartProducts'],
     queryFn: getCart,
-   });
-
-
+  });
+ 
 
   async function addProductToCart(productId) {
     try {

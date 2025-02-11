@@ -46,7 +46,7 @@ export default function Navbar() {
     {userToken && <NavLink to={'cart'} className='group mx-4'> <span className="relative inline-block fa-stack fa-1x ">
     <i className="fa fa-shopping-cart text-3xl text-[#726EEB] group-hover:text-white" />
     <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-[#726EEB] bg-white border-2 border-[#726EEB] group-hover:text-white group-hover:border-white group-hover:bg-[#726EEB] rounded-full  -mt-2">
-    {data?.data.numOfCartItems}
+    {data?.data?.numOfCartItems}
     </span>
   </span></NavLink>
   }

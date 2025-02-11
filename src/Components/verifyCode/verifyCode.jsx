@@ -13,7 +13,6 @@ export default function VerifyCode() {
 
   async function VerifyResetCode(values) {
     setIsLoading(true);
-    console.log(values);
     
     try {
       let { data } = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode',{resetCode: values.resetCode});
