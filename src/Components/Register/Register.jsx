@@ -4,7 +4,7 @@ import layerimg from '../../assets/image.gif'
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Usercontext } from '../../Context/UserContext';
 import { useEffect } from 'react';
 
@@ -17,6 +17,9 @@ export default function Register() {
   const [isLoginFrom,setLoginForm]=useState(false);
   let navigate=useNavigate();
   let{setUserToken}=useContext(Usercontext)
+
+
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
@@ -97,7 +100,7 @@ async function login(values) {
     validationSchema: loginValidationSchema,
     onSubmit: login,
   });
-/////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////// MOBILE
   return (
     <>
     {isMobile ? (
@@ -221,7 +224,9 @@ async function login(values) {
             onBlur={loginFormik.handleBlur}
           />
           {loginFormik.errors.password && loginFormik.touched.password && <div className='text-red-500 text-sm'>{loginFormik.errors.password}</div>}
-
+          <Link to={'/ForgotPassword'} type='button' className='text-white font-bold hover:text-gray-300'>
+                Forgot password?
+              </Link>
           <button 
             type="submit" 
             className="py-2 px-6 bg-[#4bb6b7] rounded-xl text-white text-xl w-full text-center"
@@ -232,7 +237,9 @@ async function login(values) {
             ) : (
               "Log in"
             )}
+            
           </button>
+          
           <p className="text-white">Don't have an account?</p>
               <button
                 onClick={() => setLoginForm(false)}
@@ -244,6 +251,7 @@ async function login(values) {
       </div>
   </section>
         ):
+        // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// PC
     (<section className='reg my-10'>
       <div
         className={`${styles.container} ${
@@ -277,22 +285,21 @@ async function login(values) {
             {loginFormik.errors.email && loginFormik.touched.email && <div className='p-1 bg-red-300 rounded-lg w-full'>{loginFormik.errors.email}</div>}
             <input className={styles.input} type="password" placeholder="Password" id='password' name='password' value={loginFormik.values.password} onChange={loginFormik.handleChange} onBlur={loginFormik.handleBlur} />
             {loginFormik.errors.password && loginFormik.touched.password && <div className='p-1 bg-red-300 rounded-lg w-full'>{loginFormik.errors.password}</div>}
-            {/* <div className={styles.content}>
-              <div className={styles.checkbox}>
+            <div className={styles.content}>
+              {/* <div className={styles.checkbox}>
                 <input type="checkbox" name="checkbox" id="checkbox" />
                 <label>Remember me</label>
-              </div>
-              <div className={styles["pass-link"]}>
-                <a href="#">Forgot password?</a>
-              </div>
-            </div> */}
+              </div> */}
+              <Link to={'/ForgotPassword'} type='button' className='hover:text-gray-500'>
+                Forgot password?
+              </Link>
+            </div>
             {loading ? <button className='py-2 px-6 bg-[#4bb6b7] rounded-xl text-[#4F46E5] flex'><i className='fas fa-spinner fa-spin text-xl'></i></button> :<button type='submit' className={styles.btn}>Log in</button>}
           </form>
         </div>
         <div className={styles["overlay-container"]}>
         <div
-  className={`${styles.overlay}`}
-  style={{ backgroundImage: `url(${layerimg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+  className={`${styles.overlay}`} style={{ backgroundImage: `url(${layerimg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
  >
             <div className={`${styles["overlay-panel"]} ${styles["overlay-left"]}`}>
               <h1 className={`${styles.head1} text-3xl m-0`}>

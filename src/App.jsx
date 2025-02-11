@@ -17,7 +17,10 @@ import { Toaster } from 'react-hot-toast'
 import CheckOut from './Components/CheckOut/CheckOut.jsx'
 import AllOrders from './Components/AllOrders/AllOrders.jsx'
 import WishList from './Components/WishList/WishList.jsx'
-import WishlistContextProvider from './Components/WishListContext/WishListContext.jsx'
+import WishlistContextProvider from './Context/WishListContext.jsx'
+import ForgotPassword from './Components/ForgotPassword/ForgotPassword.jsx'
+import VerifyCode from './Components/verifyCode/verifyCode.jsx'
+import ResetPassword from './Components/ResetPassword/ResetPassword.jsx'
 
 const routers = createHashRouter([{
   path: '/' , element: <Layout/>, children:[
@@ -32,6 +35,9 @@ const routers = createHashRouter([{
     {path:'checkout', element:<ProtectedRoute><CheckOut/></ProtectedRoute>},
     {path:'allorders', element:<ProtectedRoute><AllOrders/></ProtectedRoute>},
     {path:'wishlist', element:<ProtectedRoute><WishList/></ProtectedRoute>},
+    {path:'forgotpassword', element:<ForgotPassword/>},
+    {path:'verifycode', element:<VerifyCode/>},
+    {path:'resetpassword', element:<ResetPassword/>},
    
    ]
 }])

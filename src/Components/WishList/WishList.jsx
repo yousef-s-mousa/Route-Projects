@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { WishlistContext } from '../WishListContext/WishListContext'
 import Loader from '../Loader/Loader'
 import { Link } from 'react-router-dom';
 import { CartContext } from '../CartContext/CartContext';
+import { WishlistContext } from '../../Context/WishListContext';
 
 export default function WishList() {
  

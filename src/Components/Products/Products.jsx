@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import { CartContext } from '../CartContext/CartContext';
-import { WishlistContext } from '../WishListContext/WishListContext';
+import { WishlistContext } from '../../Context/WishListContext';
 
 export default function Products() {
   const { addProductToCart } = useContext(CartContext);

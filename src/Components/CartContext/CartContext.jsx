@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useQueryClient , useQuery } from '@tanstack/react-query';
@@ -20,7 +20,6 @@ export default function CartContextProvider({ children }) {
     queryKey: ['CartProducts'],
     queryFn: getCart,
    });
-
 
 
 
@@ -101,12 +100,17 @@ export default function CartContextProvider({ children }) {
     }
   }
 
+   useEffect(() => {
+      if (token) {
+        queryClient.invalidateQueries(['CartProducts']); 
+      }
+    }, [token, queryClient]);
   
    
 
 
   return (
-    <CartContext.Provider value={{ addProductToCart, cart , error, getCart, data, isLoading, isError,updateCartCount , deleteCartItem}}>
+    <CartContext.Provider value={{ addProductToCart , error, getCart, data, isLoading, isError,updateCartCount , deleteCartItem}}>
       {children}
     </CartContext.Provider>
   );

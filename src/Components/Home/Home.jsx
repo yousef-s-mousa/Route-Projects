@@ -6,13 +6,13 @@ import MainSlider from '../MainSlider/MainSlider'
 import CategorySlider from '../CategorySlider/CategorySlider'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../CartContext/CartContext'
-import { WishlistContext } from '../WishListContext/WishListContext'
+import { WishlistContext } from '../../Context/WishListContext'
 // //////////////////////////////////////////////// API DATA///////////////////////////////
 export default function Home() {
   const{ addProductToWishList }=useContext(WishlistContext)
   const [numsPages,setNumOfPages]=useState([])
   const [currentPage, setCurrentPage] = useState(1);
-  let {addProductToCart}=useContext(CartContext)
+  let {addProductToCart , getCart}=useContext(CartContext)
  function getAllProducts(page){
 return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=${page}`)
  }
@@ -39,6 +39,9 @@ return axios.get(`https://ecommerce.routemisr.com/api/v1/products?limit=18&page=
       setCurrentPage(page);
     }
   }
+
+
+ 
 // //////////////////////////////////////// DATA SHOW//////////////////////////////////////////////
   return <>
    {isLoading && <Loader />}

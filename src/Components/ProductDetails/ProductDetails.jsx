@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import Slider from 'react-slick'
 import { CartContext } from '../CartContext/CartContext'
-import { WishlistContext } from '../WishListContext/WishListContext'
+import { WishlistContext } from '../../Context/WishListContext'
 
 export default function ProductDetails() {
  let {id}= useParams();
