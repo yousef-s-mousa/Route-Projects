@@ -20,6 +20,7 @@ export default function CartContextProvider({ children }) {
     queryKey: ['CartProducts'],
     queryFn: getCart,
   });
+
  
 
   async function addProductToCart(productId) {
@@ -99,12 +100,11 @@ export default function CartContextProvider({ children }) {
     }
   }
 
-   useEffect(() => {
-      if (token) {
-        queryClient.invalidateQueries(['CartProducts']); 
-      }
-    }, [token, queryClient]);
-  
+  useEffect(() => {
+    if (token) {
+      getCart();
+    }
+  }, [token]);
    
 
 

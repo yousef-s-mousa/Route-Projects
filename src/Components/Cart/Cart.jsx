@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 export default function Cart() {
 
-
   const { error,data, isLoading, isError , updateCartCount ,deleteCartItem} = useContext(CartContext);
+   console.log(error);
    
   return <>
 {isLoading ? (
