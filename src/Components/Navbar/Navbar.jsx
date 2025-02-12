@@ -83,6 +83,7 @@ export default function Navbar() {
             <NavLink onClick={()=> setIsOpen(false)} to={'/products'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Products</NavLink>
             <NavLink onClick={()=> setIsOpen(false)} to={'/allorders'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Orders</NavLink>
             <NavLink onClick={()=> setIsOpen(false)} to={'/wishlist'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">WishList</NavLink>
+            <NavLink onClick={()=> setIsOpen(false)} to={'/profile'} className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]">Profile</NavLink>
           </div>}
           <div className="py-6">
           {userToken ? <span onClick={() => { logout(); setIsOpen(false); }}  className='-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-[#f9fbf2]'>Logout</span> :
