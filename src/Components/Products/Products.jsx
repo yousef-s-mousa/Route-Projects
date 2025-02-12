@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
-import { CartContext } from '../CartContext/CartContext';
 import { WishlistContext } from '../../Context/WishListContext';
+import { CartContext } from '../../Context/CartContext';
 
 export default function Products() {
   const { addProductToCart } = useContext(CartContext);

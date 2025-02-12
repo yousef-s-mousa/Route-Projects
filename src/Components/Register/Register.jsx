@@ -16,7 +16,7 @@ export default function Register() {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoginFrom,setLoginForm]=useState(false);
   let navigate=useNavigate();
-  let{setUserToken}=useContext(Usercontext)
+  let{setUserToken,setEmail}=useContext(Usercontext)
 
 
   

@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { createContext, useEffect, useState } from "react";
 
 
@@ -9,6 +10,7 @@ import { createContext, useEffect, useState } from "react";
 export default function UserContextProvider({children}){
 
    const [userToken ,setUserToken]=useState(null)
+   const [userName , setUserName]=useState(null)
 
    useEffect(()=>{
     if (localStorage.getItem('userToken')){
@@ -16,7 +18,18 @@ export default function UserContextProvider({children}){
     }
    })
 
-    return <Usercontext.Provider value={{userToken ,setUserToken}}>
+  
+   useEffect(() => {
+    if (userToken) {
+      try {
+        const decoded = jwtDecode(userToken);
+        setUserName(decoded.name); 
+      } catch (error) {
+        console.error("Invalid token:", error);
+      }
+    }
+  }, [userToken]);
+    return <Usercontext.Provider value={{userToken ,setUserToken,userName}}>
         {children}
     </Usercontext.Provider>
 }

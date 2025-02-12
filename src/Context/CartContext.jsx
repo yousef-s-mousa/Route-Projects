@@ -1,32 +1,29 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useQueryClient , useQuery } from '@tanstack/react-query';
+import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { Usercontext } from './UserContext';
 
 export const CartContext = createContext();
 
 export default function CartContextProvider({ children }) {
-  const [cart, setCart] = useState(null);
+  const { userToken } = useContext(Usercontext);
   const queryClient = useQueryClient();
-  const token = localStorage.getItem('userToken')
 
-
-
-
-  function getCart() {
-    return axios.get('https://ecommerce.routemisr.com/api/v1/cart', {headers:{token}});
+  async function getCart() {
+    const { data } = await axios.get('https://ecommerce.routemisr.com/api/v1/cart', { headers: { token: userToken } });
+    return data;
   }
-  let { data, isLoading, isError, error } = useQuery({
+
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['CartProducts'],
     queryFn: getCart,
+    enabled: !!userToken, // Only fetch when token exists
   });
-
- 
 
   async function addProductToCart(productId) {
     try {
-      const token = localStorage.getItem('userToken');
-      if (!token) {
+      if (!userToken) {
         toast.error('No Token Found');
         return;
       }
@@ -34,82 +31,57 @@ export default function CartContextProvider({ children }) {
       const { data } = await axios.post(
         'https://ecommerce.routemisr.com/api/v1/cart',
         { productId },
-        { headers: { token } }
+        { headers: { token: userToken } }
       );
+
       queryClient.invalidateQueries(['CartProducts']);
       toast.success(data.message || 'Product added successfully');
     } catch (error) {
-      console.error('Error adding product to cart:', error);
       toast.error(error.response?.data?.message || 'Something went wrong');
     }
   }
-
-
 
   async function updateCartCount(productId, count) {
     try {
-      const token = localStorage.getItem('userToken');
-      if (!token) {
+      if (!userToken) {
         toast.error('No Token Found');
         return;
       }
-  
+
       const { data } = await axios.put(
         `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
         { count },
-        { headers: { token } }
+        { headers: { token: userToken } }
       );
-  
-      setCart(data);
-  
+
       queryClient.invalidateQueries(['CartProducts']);
-  
-      toast.success(data.message || 'Cart updated successfully', {
-        duration: 1000,
-      });
+      toast.success(data.message || 'Cart updated successfully');
     } catch (error) {
-      console.error('Error changing count:', error);
       toast.error(error.response?.data?.message || 'Something went wrong');
     }
   }
-
 
   async function deleteCartItem(productId) {
     try {
-      const token = localStorage.getItem('userToken');
-      if (!token) {
+      if (!userToken) {
         toast.error('No Token Found');
         return;
       }
-  
+
       const { data } = await axios.delete(
         `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
-        { headers: { token } }
+        { headers: { token: userToken } }
       );
-  
-      setCart(data);
-  
+
       queryClient.invalidateQueries(['CartProducts']);
-  
-      toast.success(data.message || 'Item Deleted ', {
-        duration: 1000,
-      });
+      toast.success(data.message || 'Item Deleted');
     } catch (error) {
-      console.error('Error Deleting item:', error);
       toast.error(error.response?.data?.message || 'Something went wrong');
     }
   }
 
-  useEffect(() => {
-    if (token) {
-      getCart();
-    }
-  }, [token]);
-   
-
-
   return (
-    <CartContext.Provider value={{ addProductToCart , error, getCart, data, isLoading, isError,updateCartCount , deleteCartItem}}>
+    <CartContext.Provider value={{ addProductToCart, updateCartCount, deleteCartItem, data, isLoading, isError, error }}>
       {children}
     </CartContext.Provider>
   );

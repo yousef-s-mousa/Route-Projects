@@ -1,19 +1,21 @@
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import React, { useContext, useState } from 'react';
-import { CartContext } from '../CartContext/CartContext';
 import axios from 'axios';
 import Loader from '../Loader/Loader';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext';
 export default function CheckOut() {
   const { data } = useContext(CartContext);
   const token = localStorage.getItem('userToken');
   const [paymentMethod, setPaymentMethod] = useState('visa'); 
   const navigate = useNavigate();
+  const location = useLocation();
+  const prefilledData = location.state || {};  
 
   function checkOutCart(shippingAddress, method, visaUrl = "https://yousef-s-mousa.github.io/Route-Projects/#") {
-    const baseUrl = `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${data?.data?.cartId}`;
+    const baseUrl = `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${data?.cartId}`;
 
     const params = method === 'visa' ? { url: visaUrl } : {};
 
@@ -37,19 +39,19 @@ export default function CheckOut() {
         setTimeout(() => {
           navigate('/allorders');
         }, 2000);
-        console.log(data)
       }
     },
     onError: (error) => {
       toast.error(`Checkout Error: ${error.response?.data?.message || "Something went wrong"}`);
+      
     }
   });
 
   const formik = useFormik({
     initialValues: {
-      details: '',
-      phone: '',
-      city: ''
+      details: prefilledData.details || '',
+      city: prefilledData.city || '',
+      phone: prefilledData.phone || ''
     },
     onSubmit: (values) => {
       mutate({ shippingAddress: values, method: paymentMethod });
@@ -104,11 +106,11 @@ export default function CheckOut() {
                 </div>
 
                 <div className="bg-gray-100 p-6 rounded-md">
-                  <h2 className="text-3xl font-bold text-gray-800">{data?.data.data.totalCartPrice} EGP</h2>
+                  <h2 className="text-3xl font-bold text-gray-800">{data?.data.totalCartPrice} EGP</h2>
                   <ul className="text-gray-800 mt-8 space-y-3">
                     <li className="flex flex-wrap gap-4 text-sm">Tax <span className="ml-auto font-bold">$0</span></li>
                     <li className="flex flex-wrap gap-4 text-sm font-bold border-t-2 pt-4">
-                      Total <span className="ml-auto">{data?.data.data.totalCartPrice} EGP</span>
+                      Total <span className="ml-auto">{data?.data.totalCartPrice} EGP</span>
                     </li>
                   </ul>
                 </div>

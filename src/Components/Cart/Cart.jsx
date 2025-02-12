@@ -1,26 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Loader from '../Loader/Loader';
-import { CartContext } from '../CartContext/CartContext';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext';
 
 export default function Cart() {
 
-  const { error,data, isLoading, isError , updateCartCount ,deleteCartItem} = useContext(CartContext);
-   console.log(error);
+  const { error,data, isLoading, isError , getCart, updateCartCount ,deleteCartItem} = useContext(CartContext);
+
+
    
   return <>
 {isLoading ? (
   <Loader />
 ) : isError ? (
   <p className="text-red-500 text-center">{error?.message || "An unexpected error occurred"}</p>
-) : 
-  <section className="bg-white py-8 antialiased  md:py-16">
+) : data?.numOfCartItems > 0? <section className="bg-white py-8 antialiased  md:py-16">
   <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
     <h2 className="text-xl font-semibold text-[#726EEB] sm:text-2xl">Shopping Cart</h2>
     <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
       <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
         <div className="space-y-6">
-        {data?.data.data.products.map((item) =>   <div key={item._id} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm   md:p-6">
+        {data?.data.products.map((item) =>   <div key={item._id} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm   md:p-6">
             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
               <Link to={`/productsdetails/${item.product.id}`} className="shrink-0 md:order-1">
                 <img className="h-20 w-20 " src={item.product.imageCover} alt={item.product.title} />
@@ -72,7 +72,7 @@ export default function Cart() {
             <div className="space-y-2">
               <dl className="flex items-center justify-between gap-4">
                 <dt className="text-base font-normal text-gray-500 ">Original price</dt>
-                <dd className="text-base font-medium text-gray-900 ">{data.data.data.totalCartPrice} EGP</dd>
+                <dd className="text-base font-medium text-gray-900 ">{data?.data.totalCartPrice} EGP</dd>
               </dl>
               <dl className="flex items-center justify-between gap-4">
                 <dt className="text-base font-normal text-gray-500 ">Tax</dt>
@@ -81,7 +81,7 @@ export default function Cart() {
             </div>
             <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 ">
               <dt className="text-base font-bold text-gray-900 ">Total</dt>
-              <dd className="text-base font-bold text-gray-900 ">{data.data.data.totalCartPrice} EGP</dd>
+              <dd className="text-base font-bold text-gray-900 ">{data?.data.totalCartPrice} EGP</dd>
             </dl>
           </div>
           <Link to={'/checkout'} className="flex w-full items-center justify-center rounded-lg bg-[#726EEB] px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 ">Proceed to Checkout</Link>
@@ -98,7 +98,16 @@ export default function Cart() {
       </div>
     </div>
   </div>
-</section>}
+</section> :
+// ////////////////////////////////////////////////////////////////////////////////
+ <div className='justify-center flex-col flex items-center p-20'>
+<i className='fa fa-cart-shopping text-[#726EEB] text-9xl'></i>
+<h2 className='font-bold text-xl my-2'>Your cart is empty</h2>
+<p className='text-gray-700 text-center'>Add products while you shop, so they'll be ready for checkout later.</p>
+<Link to={'/products'}><button className='my-2 p-2 bg-[#4F46E5] hover:bg-[#726EEB] text-white rounded-lg'>Start shopping</button></Link>
+</div>
+  }
+  
 
 
     </>

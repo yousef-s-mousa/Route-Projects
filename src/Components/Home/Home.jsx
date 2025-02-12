@@ -5,8 +5,8 @@ import Loader from '../Loader/Loader'
 import MainSlider from '../MainSlider/MainSlider'
 import CategorySlider from '../CategorySlider/CategorySlider'
 import { Link } from 'react-router-dom'
-import { CartContext } from '../CartContext/CartContext'
 import { WishlistContext } from '../../Context/WishListContext'
+import { CartContext } from '../../Context/CartContext'
 // //////////////////////////////////////////////// API DATA///////////////////////////////
 export default function Home() {
   const{ addProductToWishList }=useContext(WishlistContext)

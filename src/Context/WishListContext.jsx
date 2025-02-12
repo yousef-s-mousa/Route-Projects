@@ -1,12 +1,14 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { Usercontext } from './UserContext';
 
 export const WishlistContext = createContext();
 
 export default function WishlistContextProvider({ children }) {
   const [wishList, setWishList] = useState(null);
+  const { userToken: token } = useContext(Usercontext);
   const queryClient = useQueryClient();
 
   async function addProductToWishList(productId) {
