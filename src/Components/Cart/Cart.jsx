@@ -2,12 +2,13 @@ import React, { useContext, useEffect } from 'react'
 import Loader from '../Loader/Loader';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../Context/CartContext';
+import { WishlistContext } from '../../Context/WishListContext';
 
 export default function Cart() {
 
   const { error,data, isLoading, isError , getCart, updateCartCount ,deleteCartItem} = useContext(CartContext);
 
-
+  const{addProductToWishList}=useContext(WishlistContext)
    
   return <>
 {isLoading ? (
@@ -46,11 +47,11 @@ export default function Cart() {
               <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                 <Link to={`/productsdetails/${item.product.id}`}> <button onClick={()=> addProductToCart(product.id)} className="text-base font-medium text-gray-900 hover:underline ">{item.product.title}</button></Link>
                 <div className="flex items-center gap-4">
-                  <button type="button" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline  ">
+                  <button onClick={()=>addProductToWishList(item.product.id)} type="button" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline  ">
                     <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                     </svg>
-                    Add to Favorites
+                    Add to Wishlist
                   </button>
                   <button onClick={()=>deleteCartItem(item.product.id)} type="button" className="inline-flex items-center text-sm font-medium text-red-600 hover:underline ">
                     <svg className="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none" viewBox="0 0 24 24">
